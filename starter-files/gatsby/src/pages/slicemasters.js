@@ -39,12 +39,11 @@ const SlicemasterStyles = styled.div`
 
 export default function SliceMastersPage({ data, pageContext }) {
   const slicemasters = data.slicemasters.nodes;
-  console.log(slicemasters);
   return (
     <>
       <Pagination
-        pageSize={pageContext.pageSize}
-        totalCount={slicemasters.totalCount}
+        pageSize={parseInt(process.env.GATSBY_PAGE_SIZE)}
+        totalCount={data.slicemasters.totalCount}
         currentPage={pageContext.currentPage || 1}
         skip={pageContext.skip}
         base="/slicemasters"
@@ -52,7 +51,7 @@ export default function SliceMastersPage({ data, pageContext }) {
       <SlicemasterGrid>
         {slicemasters.map((person) => (
           <SlicemasterStyles>
-            <Link to={`slicemaster/${person.slug.current}`}>
+            <Link to={`/slicemaster/${person.slug.current}`}>
               <h2>
                 <span className="mark">{person.name}</span>
               </h2>
